@@ -11,3 +11,18 @@
     flex-direction: column;
     padding-left: 15px;
 }
+.filter_heading{
+    font-size: 15px;
+}
+.search{
+    padding-left: 15px;
+}
+.search_bar{
+    padding: 2px;
+    padding-left: 4px;
+    margin-left: 5px;
+    width: 200px;
+}
+.search_container{
+    margin-top: 10px;
+}
