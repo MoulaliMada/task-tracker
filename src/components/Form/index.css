@@ -1,0 +1,42 @@
+.add_task_heading {
+  font-size: 20px;
+  margin: 2px;
+}
+.form_container {
+  padding: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: gray;
+  height: 100%;
+  margin: 10px;
+  border-radius: 10px;
+}
+.label {
+  display: block;
+  font-size: 18px;
+  color: rgb(67, 65, 65);
+}
+.input{
+    padding: 2px;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 300px;
+}
+.input_Date{
+    width: 200px;
+}
+.select{
+    width: 200px;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 5px;
+}
+.option{
+    padding: 5px;
+}
+.title_error{
+    color: red;
+    margin: 0px;
+}

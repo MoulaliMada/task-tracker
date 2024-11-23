@@ -1,0 +1,50 @@
+.taskItem{
+    width: 300px;
+    border-color: gray;
+    border-radius: 5px;
+    border-style: solid;
+    padding: 5px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+}
+.title{
+    font-size: 17px;
+    color: rgb(40, 33, 33);
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+}
+.description{
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.delet_Btn{
+    color: blue;
+    font-size: 13px;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.pending{
+    color:red;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.in_progress{color: rgb(255, 255, 0);
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+
+}
+.completed{
+    color: green;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
