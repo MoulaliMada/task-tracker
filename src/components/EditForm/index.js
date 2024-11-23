@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./index.css";
 
-const Form = (props) => {
-  let { taskItem, editExitTask } = props;
+const EditForm = (props) => {
+  let { taskItem ,editExitTask,ondeletetask} = props;
+  const{id}=editExitTask
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setdueDate] = useState("");
-  const [selectOption, setSelectOption] = useState("Pending");
+  const [title, setTitle] = useState(editExitTask.title);
+  const [description, setDescription] = useState(editExitTask.description);
+  const [dueDate, setdueDate] = useState(editExitTask.dueDate);
+  const [selectOption, setSelectOption] = useState(editExitTask.selectOption);
   const [titleError, settitleError] = useState(false);
   const [descriptionError, setdescriptionError] = useState(false);
   const [dueDateError, setdueDateError] = useState(false);
@@ -54,6 +55,7 @@ const Form = (props) => {
         selectOption: selectOption,
       };
       taskItem(task);
+      //ondeletetask(id)
       setTitle("");
       setDescription("");
       setdueDate("");
@@ -79,6 +81,7 @@ const Form = (props) => {
         {titleError && <p className="title_error">*Title is required.</p>}
         <label className="label">Description</label>
         <textarea
+          //value={description}
           value={description}
           onChange={chandescription}
           type="text"
@@ -93,6 +96,7 @@ const Form = (props) => {
         <label className="label">Due Date</label>
         <input
           type="date"
+          //value={dueDate}
           value={dueDate}
           onChange={changDueDate}
           className="input_Date"
@@ -114,4 +118,4 @@ const Form = (props) => {
     </div>
   );
 };
-export default Form;
+export default EditForm;

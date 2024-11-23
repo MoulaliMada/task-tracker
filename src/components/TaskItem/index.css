@@ -27,6 +27,9 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+.edit_btn{
+    margin-right: 12px;
+}
 .pending{
     color:red;
     font-size: 15px;

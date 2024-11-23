@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Form from "../Form";
+import EditForm from "../EditForm";
 import TaskItem from "../TaskItem";
 import "./index.css";
 
@@ -12,25 +13,37 @@ class Home extends Component {
     pending: true,
     inProgress: true,
     completed: true,
+    searchInput: "",
+    editingTaskId: "",
   };
 
   componentDidMount = () => {
-    const data = localStorage.getItem("tasks"); // Replace 'myKey' with your storage key
+    const data = localStorage.getItem("tasks");
     if (data) {
-      const updatedData = JSON.parse(data); // Parse JSON if the data is stored as a JSON string
+      const updatedData = JSON.parse(data);
       this.setState({ allTasks: updatedData, filterdTasks: updatedData });
     }
   };
 
   saveTaskItem = (task) => {
-    let { allTasks, statusFilter } = this.state;
+    let { allTasks ,editingTaskId} = this.state;
+    const newallTasks = allTasks.filter(each => each.id !==editingTaskId);
     this.setState({
-      allTasks: [...allTasks, task],
-      filterdTasks: [...allTasks, task],
+      filterdTasks: [...newallTasks, task],
+      allTasks: [...newallTasks, task],
+      editingTaskId: "",
     });
-    allTasks = [...allTasks, task];
+    allTasks = [...newallTasks, task];
     localStorage.setItem("tasks", JSON.stringify(allTasks));
-    this.filterItemsByStatus(statusFilter);
+    if (task.selectOption === "Pending") {
+      this.setState({ pending: true });
+    }
+    if (task.selectOption === "In Progress") {
+      this.setState({ inProgress: true });
+    }
+    if (task.selectOption === "Completed") {
+      this.setState({ completed: true });
+    }
   };
 
   ondeletetask = (id) => {
@@ -41,11 +54,14 @@ class Home extends Component {
   };
 
   filterItemsByStatus = (statusList) => {
-    const { allTasks } = this.state;
+    const { allTasks, searchInput } = this.state;
     const filterdTask = allTasks.filter((eachTask) =>
       statusList.includes(eachTask.selectOption)
     );
-    this.setState({ filterdTasks: filterdTask });
+    const searchTasks = filterdTask.filter((eachTask) =>
+      eachTask.title.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    this.setState({ filterdTasks: searchTasks });
   };
 
   changePendingCheckBox = () => {
@@ -90,17 +106,55 @@ class Home extends Component {
     this.filterItemsByStatus(statusList);
   };
 
-  onChangeSearch=(event)=>{
-  //const{allTasks}=this.state
-  let searchValue=event.target.value.toLowerCase()
-  console.log(searchValue);
-  }
+  onChangeSearch = (event) => {
+    const { statusFilter, allTasks } = this.state;
+    const filterdTask = allTasks.filter((eachTask) =>
+      statusFilter.includes(eachTask.selectOption)
+    );
+    const searchTasks = filterdTask.filter((eachTask) =>
+      eachTask.title.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    this.setState({
+      searchInput: event.target.value,
+      filterdTasks: searchTasks,
+    });
+  };
+
+  oneditTheTask = (id) => {
+    this.setState({ editingTaskId: id });
+  };
+
+  renderEditForm = () => {
+    const { allTasks, editingTaskId } = this.state;
+    let editExitTask = allTasks.find(
+      (eachTask) => eachTask.id === editingTaskId
+    );
+    return (
+      <EditForm
+        taskItem={this.saveTaskItem}
+        editExitTask={editExitTask}
+        ondeletetask={this.ondeletetask}
+      />
+    );
+  };
 
   render() {
-    const { inProgress, pending, filterdTasks, completed } = this.state;
+    const {
+      inProgress,
+      pending,
+      filterdTasks,
+      completed,
+      editingTaskId,
+    } = this.state;
+    
     return (
       <div className="home">
-        <Form taskItem={this.saveTaskItem} />
+        {editingTaskId === "" ? (
+          <Form taskItem={this.saveTaskItem} />
+        ) : (
+          this.renderEditForm()
+        )}
+
         <div>
           <div className="checkBox_container">
             <h1 className="filter_heading">Filter by</h1>
@@ -148,6 +202,7 @@ class Home extends Component {
               key={eachTask.id}
               eachTask={eachTask}
               deletetask={this.ondeletetask}
+              editTheTask={this.oneditTheTask}
             />
           ))}
         </ul>
