@@ -27,13 +27,24 @@ class Home extends Component {
 
   saveTaskItem = (task) => {
     let { allTasks, editingTaskId } = this.state;
-    const newallTasks = allTasks.filter((each) => each.id !== editingTaskId);
+    let newallTasks1= []
+    if(editingTaskId !== ""){
+      newallTasks1=allTasks.map(eachTask => {
+        if(eachTask.id === editingTaskId){
+          return task
+        }
+        return eachTask
+      })
+    }
+    else{
+      newallTasks1 = [...allTasks,task]
+    }
     this.setState({
-      filterdTasks: [...newallTasks, task],
-      allTasks: [...newallTasks, task],
+      filterdTasks: newallTasks1,
+      allTasks: newallTasks1,
       editingTaskId: "",
     });
-    allTasks = [...newallTasks, task];
+    allTasks = newallTasks1;
     localStorage.setItem("tasks", JSON.stringify(allTasks));
     if (task.selectOption === "Pending") {
       this.setState({ pending: true });
