@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import "./index.css";
 
 const EditForm = (props) => {
-  let { taskItem ,editExitTask,ondeletetask} = props;
-  const{id}=editExitTask
+  let { taskItem ,editExitTask} = props;
 
   const [title, setTitle] = useState(editExitTask.title);
   const [description, setDescription] = useState(editExitTask.description);
@@ -55,7 +54,6 @@ const EditForm = (props) => {
         selectOption: selectOption,
       };
       taskItem(task);
-      //ondeletetask(id)
       setTitle("");
       setDescription("");
       setdueDate("");

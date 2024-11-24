@@ -26,8 +26,8 @@ class Home extends Component {
   };
 
   saveTaskItem = (task) => {
-    let { allTasks ,editingTaskId} = this.state;
-    const newallTasks = allTasks.filter(each => each.id !==editingTaskId);
+    let { allTasks, editingTaskId } = this.state;
+    const newallTasks = allTasks.filter((each) => each.id !== editingTaskId);
     this.setState({
       filterdTasks: [...newallTasks, task],
       allTasks: [...newallTasks, task],
@@ -121,7 +121,10 @@ class Home extends Component {
   };
 
   oneditTheTask = (id) => {
-    this.setState({ editingTaskId: id });
+    const { editingTaskId } = this.state;
+    if (editingTaskId === "") {
+      this.setState({ editingTaskId: id });
+    }
   };
 
   renderEditForm = () => {
@@ -139,14 +142,9 @@ class Home extends Component {
   };
 
   render() {
-    const {
-      inProgress,
-      pending,
-      filterdTasks,
-      completed,
-      editingTaskId,
-    } = this.state;
-    
+    const { inProgress, pending, filterdTasks, completed, editingTaskId } =
+      this.state;
+
     return (
       <div className="home">
         {editingTaskId === "" ? (

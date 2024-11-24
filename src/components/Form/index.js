@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import "./index.css";
 
 const Form = (props) => {
-  let { taskItem, editExitTask } = props;
+  let { taskItem } = props;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
