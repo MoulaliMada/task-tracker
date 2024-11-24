@@ -47,10 +47,14 @@ class Home extends Component {
   };
 
   ondeletetask = (id) => {
-    let { allTasks } = this.state;
+    let { allTasks ,editingTaskId} = this.state;
     const tasks = allTasks.filter((each) => each.id !== id);
-    this.setState({ allTasks: tasks, filterdTasks: tasks });
+    this.setState({ allTasks: tasks, filterdTasks: tasks, });
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    if(editingTaskId === id){
+      this.setState({editingTaskId:''})
+    }
+
   };
 
   filterItemsByStatus = (statusList) => {

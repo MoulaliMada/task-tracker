@@ -45,7 +45,7 @@ const Form = (props) => {
     } else {
       setdueDateError(false);
     }
-    if (title !== "" && description !== "") {
+    if (title !== "" && description !== "" && dueDate !== "") {
       const task = {
         id: uuidv4(),
         title: title,
